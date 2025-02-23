@@ -46,7 +46,7 @@ const order1 = new Order(601, prod1, 4);
 console.log(order1.getOrderDetails());
 console.log(prod1.getDetails());
 
-// Task 3 - Created Inventory Class (Updated for Task 4)
+// Task 3 - Created Inventory Class (Updated for Task 4 & Task 5)
 class Inventory {
     constructor() {
         this.products = [];
@@ -77,6 +77,17 @@ class Inventory {
     listOrders() {
         this.orders.forEach(order => console.log(order.getOrderDetails()));
     }
+
+    // Task 5: Restock a product by increasing its stock
+    restockProduct(productId, quantity) {
+        let product = this.products.find(p => p.id === productId);
+        if (product) {
+            product.stock += quantity;
+            console.log(`${product.name} restocked. New stock: ${product.stock}`);
+        } else {
+            console.log(`Product with ID ${productId} not found.`);
+        }
+    }
 }
 
 // Test Case (Reinitialize inventory after updating the class)
@@ -88,3 +99,7 @@ inventory.listProducts();
 inventory.placeOrder(701, prod1, 5);
 inventory.listOrders();
 console.log(prod1.getDetails());
+
+// Task 5: Restock Product
+inventory.restockProduct(401, 10);
+console.log(prod1.getDetails()); // Expected: Stock should increase
