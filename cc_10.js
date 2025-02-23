@@ -46,10 +46,11 @@ const order1 = new Order(601, prod1, 4);
 console.log(order1.getOrderDetails());
 console.log(prod1.getDetails());
 
-// Task 3 - Created Inventory Class
+// Task 3 - Created Inventory Class (Updated for Task 4)
 class Inventory {
     constructor() {
         this.products = [];
+        this.orders = []; // Task 4: Added orders array
     }
 
     // Add a product to inventory
@@ -61,47 +62,29 @@ class Inventory {
     listProducts() {
         this.products.forEach(product => console.log(product.getDetails()));
     }
-}
 
-// Test Case
-const inventory = new Inventory();
-inventory.addProduct(prod1);
-inventory.listProducts();
-
-// Task 4 - Implemented Order Management
-class Inventory {
-    constructor() {
-        this.products = [];
-        this.orders = [];
-    }
-
-    addProduct(product) {
-        this.products.push(product);
-    }
-
-    listProducts() {
-        this.products.forEach(product => console.log(product.getDetails()));
-    }
-
-    // Place an order only if stock is available
+    // Task 4: Place an order only if stock is available
     placeOrder(orderId, product, quantity) {
         if (product.stock >= quantity) {
             const order = new Order(orderId, product, quantity);
             this.orders.push(order);
         } else {
-            console.log(`Not enough stock for ${product.name}.`);
+            console.log(`Not enough stock for ${product.name}. Only ${product.stock} left.`);
         }
     }
 
-    // List all placed orders
+    // Task 4: List all placed orders
     listOrders() {
         this.orders.forEach(order => console.log(order.getOrderDetails()));
     }
 }
 
-// Test Case
+// Test Case (Reinitialize inventory after updating the class)
+const inventory = new Inventory();
+inventory.addProduct(prod1);
+inventory.listProducts();
+
+// Task 4: Place an Order
 inventory.placeOrder(701, prod1, 5);
 inventory.listOrders();
 console.log(prod1.getDetails());
-
-
